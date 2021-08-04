@@ -37,6 +37,6 @@ https://api.opendota.com/api/players/56091566/matches?limit=5&win=0
 3-most picked hero last 40 games
     a- get api last 40 games
     b- list of all picked hero
-    c- 
+    c- get the most repeated item
 
 10-display embebed on discord
