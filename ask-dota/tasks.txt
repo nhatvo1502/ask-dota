@@ -30,8 +30,13 @@ requently picked hero, k/d/a, hero_damage,
 
 https://api.opendota.com/api/players/56091566/matches?limit=5&win=0
 
-1-test run function on test.py
-2-display raw data on discord
-    - display 20 win picks, 20 lost picks
-        - up hero list <--------------------------------------------
-3-display embebed on discord
+1-test run function on test.py DONE
+2-display raw data on discord DONE
+3-recent 20 win picks,20 lost picks DONE
+    - up hero list DONE
+3-most picked hero last 40 games
+    a- get api last 40 games
+    b- list of all picked hero
+    c- 
+
+10-display embebed on discord
