@@ -12,18 +12,35 @@ lastID = list(dict)[-1]
 lastHero = dict[lastID]
 #print(lastHero)
 
+def most_frequent(List):
+    counter = 0
+    num = List[0]
+     
+    for i in List:
+        curr_frequency = List.count(i)
+        if(curr_frequency> counter):
+            counter = curr_frequency
+            num = i
+ 
+    return num, curr_frequency
+
 #steamid 56091566
-odPath = f"https://api.opendota.com/api/players/{steamID}/matches?limit=20&win=0"
+odPath = f"https://api.opendota.com/api/players/{steamID}/matches?limit=40"
 r = requests.get(odPath)
 #print(r.content)
 response_info = json.loads(r.content)
 response=''
+pickedlist = []
 for match in response_info:
     for item in match:
         if item=='hero_id':
-            response = f'{response} {dict[match[item]]}'
+            #hero = dict[match[item]]
+            #pickedlist.append(hero)
+            print(match[item], dict[match[item]])
 
-print(response)
+#print(pickedlist)
+#print(most_frequent(pickedlist))
+
 
 
 
