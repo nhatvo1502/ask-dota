@@ -76,7 +76,7 @@ async def test(ctx, steamid3):
     await ctx.send(response)
 
 #!last20winpicks
-@bot.command(name='last20wpicks')
+@bot.command(name='winpick20')
 async def test(ctx, steamid3):
     odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit=20&win=1"
     r = requests.get(odPath)
@@ -89,7 +89,7 @@ async def test(ctx, steamid3):
     await ctx.send(response)
 
 #!last20lostpicks
-@bot.command(name='last20lpicks')
+@bot.command(name='lostpick20')
 async def test(ctx, steamid3):
     odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit=20&win=0"
     r = requests.get(odPath)
@@ -101,10 +101,10 @@ async def test(ctx, steamid3):
                 response = f'{response}, {dict[match[item]]}'
     await ctx.send(response)
 
-#! most picked hero last 40 games
-@bot.command(name='mostpicklast40')
+#! most picked hero last 100 games
+@bot.command(name='most100')
 async def test(ctx, steamid3):
-    odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit=40"
+    odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit=100"
     r = requests.get(odPath)
     response_info = json.loads(r.content)
     response = ''
@@ -115,7 +115,7 @@ async def test(ctx, steamid3):
                 hero = dict[match[item]]
                 pickedlist.append(hero)
     hero, counts = most_frequent(pickedlist)
-    response = f'Player picked {hero} for {counts} times'
+    response = f'Player picked {hero} for {counts} times in the last 100 games.'
     await ctx.send(response)
 
 #FUNCTIONS
@@ -129,5 +129,5 @@ def most_frequent(List):
             counter = curr_frequency
             num = i
  
-    return num, curr_frequency
+    return num, counter
 bot.run(TOKEN)
