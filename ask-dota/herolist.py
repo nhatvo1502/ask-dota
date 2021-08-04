@@ -118,3 +118,5 @@ dotadict = {
 
 def getHero(heroID):
     return dotadict[heroID]
+
+print(getHero(96))
