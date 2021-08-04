@@ -2,10 +2,17 @@
 import os
 import discord
 import herolist
+import random
+import requests
+import json
+
+#pass dota hero list dict
+dict = herolist.dotadict
 
 #import
 from discord.ext import commands
 from dotenv import load_dotenv
+from random import randint
 
 #connect discord ToKen
 load_dotenv()
@@ -33,7 +40,22 @@ async def test(ctx):
 async def test(ctx, msg):
     response = herolist.dotadict[int(msg)]
     await ctx.send(response)
-    
+
+#!lucky
+@bot.command(name='lucky')
+async def test(ctx):
+    num = randint(0, len(dict))
+    response = 'You should play '+dict[num]
+    await ctx.send(response)
+
+#!pstat
+@bot.command(name='pstat')
+async def text(ctx, steamid3):
+    odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit=5&win=0"
+    r = requests.get(odPath)
+    response_info = json.loads(r.content)
+    response=f'json {response_info}'
+    await ctx.send(response)
 
 
 bot.run(TOKEN)

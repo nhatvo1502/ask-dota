@@ -1,16 +1,35 @@
 import requests
 import herolist
+import random
+import json
 
-#steamID = input(": ")
+from random import randint
+steamID = input(": ")
 
-#odPath = f"https://api.opendota.com/api/players/130494014/recentMatches"
+#steamid 56091566
+odPath = f"https://api.opendota.com/api/players/{steamID}/matches?limit=5&win=0"
 #print(odPath)
-#r = requests.get(odPath)
+r = requests.get(odPath)
+#print(r.content)
+response_info = json.loads(r.content)
 
-print(len(herolist.dotadict))
+for match in response_info:
+    print(match['match_id'])
 
 
+
+#print(len(herolist.dotadict))
+
+
+#print last hero
 dict = herolist.dotadict
 lastID = list(dict)[-1]
 lastHero = dict[lastID]
-print(lastHero)
+#print(lastHero)
+
+#random a hero from herolist
+num = randint(0, len(dict))
+#print(num)
+response = dict[num]
+#print(response)
+
