@@ -29,3 +29,9 @@ https://api.opendota.com/api/players/130494014/counts
 requently picked hero, k/d/a, hero_damage, 
 
 https://api.opendota.com/api/players/56091566/matches?limit=5&win=0
+
+1-test run function on test.py
+2-display raw data on discord
+    - display 20 win picks, 20 lost picks
+        - up hero list <--------------------------------------------
+3-display embebed on discord
