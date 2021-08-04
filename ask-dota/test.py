@@ -13,8 +13,7 @@ lastHero = dict[lastID]
 #print(lastHero)
 
 #steamid 56091566
-odPath = f"https://api.opendota.com/api/players/{steamID}/matches?limit=20&win=1"
-#print(odPath)
+odPath = f"https://api.opendota.com/api/players/{steamID}/matches?limit=20&win=0"
 r = requests.get(odPath)
 #print(r.content)
 response_info = json.loads(r.content)

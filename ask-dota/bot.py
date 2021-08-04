@@ -60,7 +60,7 @@ async def text(ctx, steamid3):
             response=f'{response} {item}'
     await ctx.send(response)
 
-#!last20picks
+    
 @bot.command(name='last20picks')
 async def test(ctx, steamid3):
     odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit=20"
@@ -70,11 +70,11 @@ async def test(ctx, steamid3):
     for match in response_info:
         for item in match:
             if item=='hero_id':
-                response = f'{response} {dict[match[item]]}'
+                response = f'{response}, {dict[match[item]]}'
     await ctx.send(response)
 
 #!last20winpicks
-@bot.command(name='last20winpicks')
+@bot.command(name='last20wpicks')
 async def test(ctx, steamid3):
     odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit=20&win=1"
     r = requests.get(odPath)
@@ -83,11 +83,11 @@ async def test(ctx, steamid3):
     for match in response_info:
         for item in match:
             if item=='hero_id':
-                response = f'{response} {dict[match[item]]}'
+                response = f'{response}, {dict[match[item]]}'
     await ctx.send(response)
 
 #!last20lostpicks
-@bot.command(name='last20lostpicks')
+@bot.command(name='last20lpicks')
 async def test(ctx, steamid3):
     odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit=20&win=0"
     r = requests.get(odPath)
@@ -96,7 +96,7 @@ async def test(ctx, steamid3):
     for match in response_info:
         for item in match:
             if item=='hero_id':
-                response = f'{response} {dict[match[item]]}'
+                response = f'{response}, {dict[match[item]]}'
     await ctx.send(response)
 
 bot.run(TOKEN)
