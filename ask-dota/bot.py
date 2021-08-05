@@ -51,7 +51,7 @@ async def test(ctx):
     await ctx.send(response)
 
 #!pstat
-@bot.command(name='pstat')
+@bot.command(name='pstat', help='testing')
 async def text(ctx, steamid3):
     odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit=5&win=0"
     r = requests.get(odPath)
@@ -61,6 +61,12 @@ async def text(ctx, steamid3):
         for item in match:
             response=f'{response} {item}'
     await ctx.send(response)
+
+@bot.command(name='pstat2', help='return player stats')
+async def text(ctx, steamid32):
+    embed = playerinfo(steamid32)
+
+    await ctx.send(embed=embed)
 
     
 @bot.command(name='last20picks')
@@ -118,7 +124,9 @@ async def test(ctx, steamid3):
     response = f'Player picked {hero} for {counts} times in the last 100 games.'
     await ctx.send(response)
 
-#FUNCTIONS
+### FUNCTIONS ###
+
+#F take a list and return the most repeated item
 def most_frequent(List):
     counter = 0
     num = List[0]
@@ -128,6 +136,30 @@ def most_frequent(List):
         if(curr_frequency> counter):
             counter = curr_frequency
             num = i
- 
+    
     return num, counter
+
+#F take a steamid32bit and return *more variables when needed*
+def playerinfo(steamid32):
+    odPath = f'https://api.opendota.com/api/players/{steamid32}'
+    r = requests.get(odPath)
+    content_jason = json.loads(r.content)
+    account_id= f"{content_jason['profile']['account_id']}"
+    personaname = f"{content_jason['profile']['personaname']}"
+    avatarfull = f"{content_jason['profile']['avatarfull']}"
+    mmr_estimate = f"{content_jason['mmr_estimate']['estimate']}"
+    competitive_rank = f"{content_jason['competitive_rank']}"
+    profileurl = f"{content_jason['profile']['profileurl']}"
+
+    embed=discord.Embed(title=personaname, description=account_id, color=0x077369)
+    embed.set_thumbnail(url=avatarfull)
+    embed.add_field(name="MMR", value=mmr_estimate, inline=True)
+    embed.add_field(name="KDA", value="'coming soon'", inline=True)
+    embed.add_field(name="Main role", value="'coming soon'", inline=True)
+    embed.add_field(name="Competive Rank", value=competitive_rank, inline=True)
+    embed.add_field(name="Profile URL", value=profileurl, inline=False)
+    embed.set_footer(text="@copyright bytheorderofPeakyBlinders")
+    
+    return embed
+    
 bot.run(TOKEN)
