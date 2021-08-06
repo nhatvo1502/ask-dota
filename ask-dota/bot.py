@@ -23,7 +23,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 bot = discord.Client()
 
 ### PREFIX ###
-bot = commands.Bot(command_prefix='!#')
+bot = commands.Bot(command_prefix='*')
 
 #succesfully message
 @bot.event
