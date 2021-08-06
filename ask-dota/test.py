@@ -87,12 +87,34 @@ def playerinfo(steamid32):
 #print(playerinfo(56091566))
 
 ######### KDA #######################
-#F take steamid3 then return last 100 game info as jason
-def last100json(steamid3):
-    odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit=100"
+#F take steamid3 and game_counts then return last 5 game info as jason
+def last_x_game_jason(steamid3, game_counts):
+    odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit={game_counts}"
     r = requests.get(odPath)
     result = json.loads(r.content)
+    
     return result
 
-print(last100json(86745912))
+def kda(steamid3, game_counts):
+    x_game = last_x_game_jason(steamid3, game_counts)
+    kills, deaths, assists = 0, 0, 0
+    
+    for match in x_game:
+        kills+=match['kills']
+        deaths+=match['deaths']
+        assists+=match['assists']
+    
+    mkills = round(kills/game_counts)
+    mdeaths = round(deaths/game_counts)
+    massists = round(assists/game_counts)
+
+    return mkills, mdeaths, massists
+
+
+print(kda(86745912, 5))
+
+#last 5 games for 86745912
+#k=27, d=19, 51
+#mk=5.4->5, md=3.8->4, ma=10.2->10
+#kda=5/4/10
 

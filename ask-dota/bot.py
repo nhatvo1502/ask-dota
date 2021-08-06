@@ -153,9 +153,32 @@ def most_frequent(List):
 
     return num, counter
 
+#F take steamid3 and game_counts then return last x amount of games into jason variable
+def last_x_game_jason(steamid3, game_counts):
+    odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit={game_counts}"
+    r = requests.get(odPath)
+    result = json.loads(r.content)
+    
+    return result
+
+#F KDA
+# Get KDA for each game then medium them out
+def kda(x_game):
+    game_counts = len(x_game)
+    kills, deaths, assists = 0, 0, 0
+    
+    for match in x_game:
+        kills+=match['kills']
+        deaths+=match['deaths']
+        assists+=match['assists']
+    
+    mkills = round(kills/game_counts)
+    mdeaths = round(deaths/game_counts)
+    massists = round(assists/game_counts)
+
+    return mkills, mdeaths, massists
+
 # F take a steamid32bit and return *more variables when needed*
-
-
 def playerinfo(steamid32):
     odPath = f'https://api.opendota.com/api/players/{steamid32}'
     r = requests.get(odPath)
@@ -167,11 +190,15 @@ def playerinfo(steamid32):
     competitive_rank = f"{content_jason['competitive_rank']}"
     profileurl = f"{content_jason['profile']['profileurl']}"
 
+    #KDA
+    x_game = last_x_game_jason(steamid32, 100)
+    k, d, a = kda(x_game)
+
     embed = discord.Embed(
         title=personaname, description=account_id, color=0x077369)
     embed.set_thumbnail(url=avatarfull)
     embed.add_field(name="MMR", value=mmr_estimate, inline=True)
-    embed.add_field(name="KDA", value="'coming soon'", inline=True)
+    embed.add_field(name="KDA", value=f'{k}/{d}/{a}', inline=True)
     embed.add_field(name="Main role", value="'coming soon'", inline=True)
     embed.add_field(name="Competive Rank",
                     value=competitive_rank, inline=False)
