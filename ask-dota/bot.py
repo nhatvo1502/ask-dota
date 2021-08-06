@@ -19,11 +19,11 @@ dict = herolist.dotadict
 # connect discord ToKen
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
-
+PREFIX = os.getenv('PREFIX')
 bot = discord.Client()
 
 ### PREFIX ###
-bot = commands.Bot(command_prefix='*')
+bot = commands.Bot(command_prefix=PREFIX)
 
 # succesfully message
 
