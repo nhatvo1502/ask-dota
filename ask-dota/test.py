@@ -84,4 +84,15 @@ def playerinfo(steamid32):
 
     return account_id, personaname, avatarfull, mmr_estimate, competitive_rank
 
-print(playerinfo(56091566))
+#print(playerinfo(56091566))
+
+######### KDA #######################
+#F take steamid3 then return last 100 game info as jason
+def last100json(steamid3):
+    odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit=100"
+    r = requests.get(odPath)
+    result = json.loads(r.content)
+    return result
+
+print(last100json(86745912))
+

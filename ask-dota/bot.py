@@ -156,7 +156,12 @@ def playerinfo(steamid32):
     embed.add_field(name="MMR", value=mmr_estimate, inline=True)
     embed.add_field(name="KDA", value="'coming soon'", inline=True)
     embed.add_field(name="Main role", value="'coming soon'", inline=True)
-    embed.add_field(name="Competive Rank", value=competitive_rank, inline=True)
+    embed.add_field(name="Competive Rank", value=competitive_rank, inline=False)
+    
+    embed.add_field(name="[Pos1: 30%]--[Pos2: 20%]--", value=".", inline=True)
+    embed.add_field(name="[Pos3: 10%]--[Pos4: 30%]--", value=".", inline=True)
+    embed.add_field(name="[Pos5: 10%]", value=".", inline=True)
+
     embed.add_field(name="Profile URL", value=profileurl, inline=False)
     embed.set_footer(text="@copyright bytheorderofPeakyBlinders")
     
