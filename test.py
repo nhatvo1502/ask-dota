@@ -117,11 +117,6 @@ def kda(steamid3, game_counts):
 #mk=5.4->5, md=3.8->4, ma=10.2->10
 #kda=5/4/10
 
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> 536973ddc2b61f7190b51a6b5386a38086829a6f
 
 ######### LANE ROLES #######################
 #take steamid3 return number of match of each lane role
@@ -149,9 +144,6 @@ def lane_role(steamid3):
     #return pos1g, pos1w, pos2g, pos2w, pos3g, pos3w, pos4g, pos4w, pos5g, pos5w
     return medium_pos1g, pos1_winrate
 
-<<<<<<< HEAD
-print(lane_role(86745912))
-=======
 #print(lane_role(86745912))
 
 ### F get items at 15 minutes 900 sec
@@ -169,5 +161,3 @@ def getMatch_js(matchID, steamid32):
 
     
 print(getMatch_js('6040802788', '86745912'))
->>>>>>> Stashed changes
->>>>>>> 536973ddc2b61f7190b51a6b5386a38086829a6f
