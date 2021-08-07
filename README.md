@@ -14,11 +14,6 @@
 
   <h3 align="center">Ask Dota Discord Bot</h3>
 
-  <p align="center">
-    <br />
-    <a href="https://github.com/nhatvo1502/ask-dota"><strong>Explore the docs »</strong></a>
-    <br />
-  </p>
 </p>
 
 
@@ -77,7 +72,7 @@ Dicord bot utilising data from OpenDotaApi
 git clone https://github.com/nhatvo1502/ask-dota
 ```
 
-2. To get started a discord account is needed - sign up [here](https://discord.com)
+2. Sign up a discord account if you don't already have one [here](https://discord.com)
 
 3. A discord app will need to be set up following this [instruction](https://viebly.com/create-basic-discord-bot/technology/)
 
