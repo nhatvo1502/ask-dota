@@ -178,6 +178,33 @@ def kda(x_game):
 
     return mkills, mdeaths, massists
 
+### LANE ROLE #######################
+def lane_role(steamid3):
+    odPath = f"https://api.opendota.com/api/players/{steamid3}/counts"
+    r = requests.get(odPath)
+    result = json.loads(r.content)
+    pos1g, pos1w, pos2g, pos2w, pos3g, pos3w, pos4g, pos4w, pos5g, pos5w = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    pos1g+=result['lane_role']['0']['games']
+    pos1w+=result['lane_role']['0']['win']
+    pos2g+=result['lane_role']['1']['games']
+    pos2w+=result['lane_role']['1']['win']
+    pos3g+=result['lane_role']['2']['games']
+    pos3w+=result['lane_role']['2']['win']
+    pos4g+=result['lane_role']['3']['games']
+    pos4w+=result['lane_role']['3']['win']
+    pos5g+=result['lane_role']['4']['games']
+    pos5w+=result['lane_role']['4']['win']
+
+    total_games = pos1g+pos2g+pos3g+pos4g+pos5g
+
+    wrp1 = round((pos1w/pos1g)*100)
+    wrp2 = round((pos2w/pos2g)*100)
+    wrp3 = round((pos3w/pos3g)*100)
+    wrp4 = round((pos4w/pos4g)*100)
+    wrp5 = round((pos5w/pos5g)*100)
+    
+    return total_games, pos1g, pos2g, pos3g, pos4g, pos5g, wrp1, wrp2, wrp3, wrp4, wrp5
+
 # F take a steamid32bit and return *more variables when needed*
 def playerinfo(steamid32):
     odPath = f'https://api.opendota.com/api/players/{steamid32}'
@@ -194,18 +221,22 @@ def playerinfo(steamid32):
     x_game = last_x_game_jason(steamid32, 100)
     k, d, a = kda(x_game)
 
+    #LANE ROLE
+    total_games, pos1g, pos2g, pos3g, pos4g, pos5g, wrp1, wrp2, wrp3, wrp4, wrp5 = lane_role(steamid32)
+
     embed = discord.Embed(
         title=personaname, description=account_id, color=0x077369)
     embed.set_thumbnail(url=avatarfull)
     embed.add_field(name="MMR", value=mmr_estimate, inline=True)
     embed.add_field(name="KDA", value=f'{k}/{d}/{a}', inline=True)
     embed.add_field(name="Main role", value="'coming soon'", inline=True)
-    embed.add_field(name="Competive Rank",
-                    value=competitive_rank, inline=False)
-
-    embed.add_field(name="[Pos1: 30%]--[Pos2: 20%]--", value=".", inline=True)
-    embed.add_field(name="[Pos3: 10%]--[Pos4: 30%]--", value=".", inline=True)
-    embed.add_field(name="[Pos5: 10%]", value=".", inline=True)
+    embed.add_field(name="Competive Rank", value=competitive_rank, inline=False)
+    embed.add_field(name=f"Total games", value=f"{total_games}", inline=True)
+    embed.add_field(name=f"Pos1: {pos1g}", value=f"{wrp1}% win", inline=True)
+    embed.add_field(name=f"Pos1: {pos2g}", value=f"{wrp2}% win", inline=True)
+    embed.add_field(name=f"Pos1: {pos3g}", value=f"{wrp3}% win", inline=True)
+    embed.add_field(name=f"Pos1: {pos4g}", value=f"{wrp4}% win", inline=True)
+    embed.add_field(name=f"Pos1: {pos5g}", value=f"{wrp5}% win", inline=True)
 
     embed.add_field(name="Profile URL", value=profileurl, inline=False)
     embed.set_footer(text="@copyright bytheorderofPeakyBlinders")
