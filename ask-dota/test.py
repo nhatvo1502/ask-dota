@@ -118,3 +118,50 @@ print(kda(86745912, 5))
 #mk=5.4->5, md=3.8->4, ma=10.2->10
 #kda=5/4/10
 
+<<<<<<< Updated upstream
+=======
+
+######### LANE ROLES #######################
+#take steamid3 return number of match of each lane role
+def lane_role(steamid3):
+    odPath = f"https://api.opendota.com/api/players/{steamid3}/counts"
+    r = requests.get(odPath)
+    result = json.loads(r.content)
+    pos1g, pos1w, pos2g, pos2w, pos3g, pos3w, pos4g, pos4w, pos5g, pos5w = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    pos1g+=result['lane_role']['0']['games']
+    pos1w+=result['lane_role']['0']['win']
+    pos2g+=result['lane_role']['1']['games']
+    pos2w+=result['lane_role']['1']['win']
+    pos3g+=result['lane_role']['2']['games']
+    pos3w+=result['lane_role']['2']['win']
+    pos4g+=result['lane_role']['3']['games']
+    pos4w+=result['lane_role']['3']['win']
+    pos5g+=result['lane_role']['4']['games']
+    pos5w+=result['lane_role']['4']['win']
+    
+    total_game = pos1g+pos2g+pos3g+pos4g+pos5g
+
+    medium_pos1g = round((pos1g/total_game)*100)
+    pos1_winrate = round((pos1w/pos1g)*100)
+
+    #return pos1g, pos1w, pos2g, pos2w, pos3g, pos3w, pos4g, pos4w, pos5g, pos5w
+    return medium_pos1g, pos1_winrate
+
+#print(lane_role(86745912))
+
+### F get items at 15 minutes 900 sec
+def getMatch_js(matchID, steamid32):
+    odPath = f"https://api.opendota.com/api/matches/{matchID}/"
+    r = requests.get(odPath)
+    result = json.loads(r.content)
+
+    for player in result['players']:
+        print(player['account_id'])
+        print(steamid32)
+        if str(player['account_id'])==steamid32:
+            return player['purchase_log']
+
+
+    
+print(getMatch_js('6040802788', '86745912'))
+>>>>>>> Stashed changes
