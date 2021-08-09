@@ -58,15 +58,6 @@ async def test(ctx):
     response = 'You should play '+dict[num]
     await ctx.send(response)
 
-    odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit=5&win=0"
-    r = requests.get(odPath)
-    response_info = json.loads(r.content)
-    response = ''
-    for match in response_info:
-        for item in match:
-            response = f'{response} {item}'
-    await ctx.send(response)
-
 
 @bot.command(name='pstat', help='return player stats')
 async def text(ctx, steamid32):
