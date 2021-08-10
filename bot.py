@@ -23,7 +23,7 @@ PREFIX = os.getenv('PREFIX')
 bot = discord.Client()
 
 ### PREFIX ###
-bot = commands.Bot(command_prefix=PREFIX, help_command=None)
+bot = commands.Bot(command_prefix=PREFIX, help_command=None, case_insensitive=True)
 
 # succesfully message
 
