@@ -23,7 +23,7 @@ PREFIX = os.getenv('PREFIX')
 bot = discord.Client()
 
 ### PREFIX ###
-bot = commands.Bot(command_prefix=PREFIX)
+bot = commands.Bot(command_prefix=PREFIX, help_command=None)
 
 # succesfully message
 
@@ -74,7 +74,7 @@ async def test(ctx):
     response = 'You should play '+dict[num]
     await ctx.send(response)
 
-    odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit=5&win=0"
+    odPath = f"https://api.opendota.com/api/players/{steamid32}/matches?limit=5&win=0"
     r = requests.get(odPath)
     response_info = json.loads(r.content)
     response = ''
