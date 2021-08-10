@@ -81,7 +81,7 @@ PREFIX=*
 5. Install all required modules:
 
 ```
-python install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 6. Once all the installation steps are done, run the bot.py file:
