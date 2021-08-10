@@ -1,5 +1,6 @@
 # bot.py
 from random import randint
+from discord.ext.commands.core import command
 from dotenv import load_dotenv
 from discord.ext import commands
 import os
@@ -8,7 +9,7 @@ import herolist
 import random
 import requests
 import json
-
+import cmd
 from requests.models import Response
 
 # pass dota hero list dict
@@ -45,10 +46,13 @@ async def test(ctx):
 
 @bot.command()
 async def help(ctx):
-    embed=discord.Embed(title="Help command", description=f'Prefix of bot: **`{PREFIX}`**',color=discord.Color.blurple())
+    embed=discord.Embed(title="Ask-Dota", description=f'Prefix of bot: **`{PREFIX}`**',color=discord.Color.blurple())
     embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
+    
+
+
     embed.add_field(name="List of command: ", 
-                value="`help\n` `info\n` `gethero\n` `last20picks\n` `lostpick20\n` `lucky\n` `most100\n` `pstat\n` `winpick20\n`", inline=False)
+                 value="`help\n` `info\n` `gethero\n` `last20picks\n` `lostpick20\n` `lucky\n` `most100\n` `pstat\n` `winpick20\n`", inline=False)
     
     await ctx.send(embed=embed)
 
