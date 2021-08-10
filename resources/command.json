@@ -1,0 +1,10 @@
+{
+    "help": "Show this command",
+    "info": "Info of bot",
+    "lucky": "Pick random hero to play",
+    "pstat": "Return player stats",
+    "most100": "Most 100 heros played",
+    "last20picks": "Last 20 heroes picked",
+    "winpick20": "Last 20 heroes won when picked",
+    "lostpick20": "Last 20 heroes lost when picked"
+}
