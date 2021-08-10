@@ -31,7 +31,7 @@ bot = commands.Bot(command_prefix=PREFIX)
 @bot.event
 async def on_ready():
     print(f'{bot.user} has connected to Discord!')
-
+    await bot.change_presence(status=discord.Status.online, activity=discord.Game(f'{PREFIX}help'))
 ### CALL ###
 #!info
 
