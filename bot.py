@@ -1,6 +1,5 @@
 # bot.py
 from random import randint
-from discord.ext.commands.core import command
 from dotenv import load_dotenv
 from discord.ext import commands
 import os
@@ -9,7 +8,7 @@ import herolist
 import random
 import requests
 import json
-import cmd
+
 from requests.models import Response
 
 # pass dota hero list dict
@@ -24,7 +23,7 @@ PREFIX = os.getenv('PREFIX')
 bot = discord.Client()
 
 ### PREFIX ###
-bot = commands.Bot(command_prefix=PREFIX, help_command=None)
+bot = commands.Bot(command_prefix=PREFIX, help_command=None, case_insensitive=True)
 
 # succesfully message
 
@@ -33,6 +32,7 @@ bot = commands.Bot(command_prefix=PREFIX, help_command=None)
 async def on_ready():
     print(f'{bot.user} has connected to Discord!')
     await bot.change_presence(status=discord.Status.online, activity=discord.Game(f'{PREFIX}help'))
+
 ### CALL ###
 #!info
 
@@ -42,19 +42,19 @@ async def test(ctx):
     response = 'ASK-DOTA BOT'
     await ctx.send(response)
 
+
 #test bot command list
 
 @bot.command()
 async def help(ctx):
-    embed=discord.Embed(title="Ask-Dota", description=f'Prefix of bot: **`{PREFIX}`**',color=discord.Color.blurple())
+    embed=discord.Embed(title="Help command", description=f'Prefix of bot: **`{PREFIX}`**',color=discord.Color.blurple())
     embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
-    
-
-
+    #after this line, just want to test, not official, will use .json file for list of command
     embed.add_field(name="List of command: ", 
-                 value="`help\n` `info\n` `gethero\n` `last20picks\n` `lostpick20\n` `lucky\n` `most100\n` `pstat\n` `winpick20\n`", inline=False)
+                value="`help\n` `info\n` `gethero\n` `last20picks\n` `lostpick20\n` `lucky\n` `most100\n` `pstat\n` `winpick20\n`", inline=False)
     
     await ctx.send(embed=embed)
+
 
 
 #!gethero
@@ -72,6 +72,15 @@ async def test(ctx, msg):
 async def test(ctx):
     num = randint(0, len(dict))
     response = 'You should play '+dict[num]
+    await ctx.send(response)
+
+    odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit=5&win=0"
+    r = requests.get(odPath)
+    response_info = json.loads(r.content)
+    response = ''
+    for match in response_info:
+        for item in match:
+            response = f'{response} {item}'
     await ctx.send(response)
 
 
