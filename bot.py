@@ -51,7 +51,7 @@ async def help(ctx):
     embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
     #after this line, just want to test, not official, will use .json file for list of command
     embed.add_field(name="List of command: ", 
-                value="`help\n` `info\n` `gethero\n` `last20picks\n` `lostpick20\n` `lucky\n` `most100\n` `pstat\n` `winpick20\n`", inline=False)
+                value="`help\n` `info\n` `gethero\n` `last20picks or l20p\n` `lostpick20 or lp20\n` `lucky\n` `most100 or m100\n` `pstat or ps\n` `winpick20 or wp20\n`", inline=False)
     
     await ctx.send(embed=embed)
 
