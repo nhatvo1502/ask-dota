@@ -84,14 +84,14 @@ async def test(ctx):
     await ctx.send(response)
 
 
-@bot.command(name='pstat', help='return player stats')
+@bot.command(name='pstat', help='return player stats', aliases=['ps', 'stat', 'pt'])
 async def text(ctx, steamid32):
     embed = playerinfo(steamid32)
 
     await ctx.send(embed=embed)
 
 
-@bot.command(name='last20picks')
+@bot.command(name='last20picks', aliases =['l20p'])
 async def test(ctx, steamid3):
     odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit=20"
     r = requests.get(odPath)
@@ -106,7 +106,7 @@ async def test(ctx, steamid3):
 #!last20winpicks
 
 
-@bot.command(name='winpick20')
+@bot.command(name='winpick20', aliases = ['wp20'])
 async def test(ctx, steamid3):
     odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit=20&win=1"
     r = requests.get(odPath)
@@ -121,7 +121,7 @@ async def test(ctx, steamid3):
 #!last20lostpicks
 
 
-@bot.command(name='lostpick20')
+@bot.command(name='lostpick20', aliases = ['lp20'])
 async def test(ctx, steamid3):
     odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit=20&win=0"
     r = requests.get(odPath)
@@ -136,7 +136,7 @@ async def test(ctx, steamid3):
 #! most picked hero last 100 games
 
 
-@bot.command(name='most100')
+@bot.command(name='most100', aliases = ['m100'])
 async def test(ctx, steamid3):
     odPath = f"https://api.opendota.com/api/players/{steamid3}/matches?limit=100"
     r = requests.get(odPath)
