@@ -66,7 +66,7 @@ dotadict = {
     66: "Chen",
     67: "Spectre",
     69: "Doom",
-    68: "Ancient Apparition",
+    68: "AncientApparition",
     70: "Ursa",
     71: "Spirit Breaker",
     72: "Gyrocopter",

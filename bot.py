@@ -8,12 +8,13 @@ import herolist
 import random
 import requests
 import json
-
+from discord import Embed, Emoji
+from discord.ext.commands import Bot
 from requests.models import Response
 
 # pass dota hero list dict
 dict = herolist.dotadict
-
+img = herolist.dotadict
 # import
 
 # connect discord ToKen
@@ -51,7 +52,7 @@ async def help(ctx):
     embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
     #after this line, just want to test, not official, will use .json file for list of command
     embed.add_field(name="List of command: ", 
-                value="`help\n` `info\n` `gethero\n` `last20picks or l20p\n` `lostpick20 or lp20\n` `lucky\n` `most100 or m100\n` `pstat or ps\n` `winpick20 or wp20\n`", inline=False)
+                value="`help\n` `info\n` `gethero\n` `last20picks\n` `lostpick20\n` `lucky\n` `most100\n` `pstat\n` `winpick20\n`", inline=False)
     
     await ctx.send(embed=embed)
 
@@ -149,7 +150,8 @@ async def test(ctx, steamid3):
                 hero = dict[match[item]]
                 pickedlist.append(hero)
     hero, counts = most_frequent(pickedlist)
-    response = f'Player picked {hero} for {counts} times in the last 100 games.'
+    hero_icon = discord.utils.get(bot.emojis, name=f'{hero}')
+    response = f'Player picked {hero} {hero_icon} for {counts} times in the last 100 games.'
     await ctx.send(response)
 
 ### FUNCTIONS ###
