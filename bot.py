@@ -263,7 +263,8 @@ def playerinfo(steamid32):
     embed = discord.Embed(
         title=personaname, description=account_id, color=0x077369)
     embed.set_thumbnail(url=avatarfull)
-    embed.add_field(name="MMR", value=f'{mmr_estimate} \nRank: `{medal}`', inline=True)
+    embed.add_field(name="MMR", value=f'{mmr_estimate}', inline=True)
+    embed.add_field(name="Rank", value=f"{medal}", inline=True)
     embed.add_field(name="KDA", value=f'{k}/{d}/{a}', inline=True)
     embed.add_field(name="Main role", value="'coming soon'", inline=True)
     embed.add_field(name="Competive Rank", value=competitive_rank, inline=False)
