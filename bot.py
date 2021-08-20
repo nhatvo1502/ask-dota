@@ -231,9 +231,27 @@ def playerinfo(steamid32):
     account_id = f"{content_jason['profile']['account_id']}"
     personaname = f"{content_jason['profile']['personaname']}"
     avatarfull = f"{content_jason['profile']['avatarfull']}"
-    mmr_estimate = f"{content_jason['mmr_estimate']['estimate']}"
+    mmr_estimate = int(f"{content_jason['mmr_estimate']['estimate']}")
     competitive_rank = f"{content_jason['competitive_rank']}"
     profileurl = f"{content_jason['profile']['profileurl']}"
+    
+    
+    
+
+    if mmr_estimate > 0 and mmr_estimate <= 1232:
+        medal = "Helard"
+    elif mmr_estimate >= 1233 and mmr_estimate <= 2002:
+        medal = "Crusader"
+    elif mmr_estimate >= 2003 and mmr_estimate <= 2156:
+        medal = "Archon"
+    elif mmr_estimate >= 2157 and mmr_estimate <= 3686:
+        medal = "Legend"
+    elif mmr_estimate >= 3688 and mmr_estimate <= 4466:
+        medal = "Ancient"
+    elif mmr_estimate >= 4467 and mmr_estimate <= 5420:
+        medal = "Divine"
+    elif mmr_estimate > 5421:
+        medal = "Immortal"
 
     #KDA
     x_game = last_x_game_jason(steamid32, 100)
@@ -245,7 +263,7 @@ def playerinfo(steamid32):
     embed = discord.Embed(
         title=personaname, description=account_id, color=0x077369)
     embed.set_thumbnail(url=avatarfull)
-    embed.add_field(name="MMR", value=mmr_estimate, inline=True)
+    embed.add_field(name="MMR", value=f'{mmr_estimate} \nRank: `{medal}`', inline=True)
     embed.add_field(name="KDA", value=f'{k}/{d}/{a}', inline=True)
     embed.add_field(name="Main role", value="'coming soon'", inline=True)
     embed.add_field(name="Competive Rank", value=competitive_rank, inline=False)
